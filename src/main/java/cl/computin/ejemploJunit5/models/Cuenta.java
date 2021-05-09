@@ -4,13 +4,13 @@ import cl.computin.ejemploJunit5.models.exception.DineroInsuficienteExeption;
 
 import java.math.BigDecimal;
 
-public class Cuentas {
+public class Cuenta {
 
     private String persona;
     private BigDecimal saldo;
+    private Banco banco;
 
-
-    public Cuentas(String persona, BigDecimal saldo) {
+    public Cuenta(String persona, BigDecimal saldo) {
         this.persona = persona;
         this.saldo = saldo;
     }
@@ -30,6 +30,15 @@ public class Cuentas {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
+
+    public Banco getBanco() {
+        return banco;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+    }
+
     public void debito(BigDecimal monto){
      BigDecimal nuevoSaldo = this.saldo.subtract(monto);
      if(nuevoSaldo.compareTo(BigDecimal.ZERO) < 0){
@@ -43,13 +52,13 @@ public class Cuentas {
 
     @Override
     public boolean equals(Object obj) {
-        if(! (obj instanceof Cuentas)){
+        if(! (obj instanceof Cuenta)){
             return false;
         }
-        Cuentas cuentas = (Cuentas) obj;
+        Cuenta cuenta = (Cuenta) obj;
         if (this.persona == null || this.saldo == null){
             return false;
         }
-        return this.persona.equals(cuentas.getPersona()) && this.saldo.equals(cuentas.getSaldo());
+        return this.persona.equals(cuenta.getPersona()) && this.saldo.equals(cuenta.getSaldo());
     }
 }
